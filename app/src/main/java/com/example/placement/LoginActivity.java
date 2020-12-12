@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     private String Password;
     private FirebaseAuth mAuth;
     private TextView register;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
