@@ -64,13 +64,94 @@
             android:id="@+id/Company"
             android:text="Company"/>
     </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Branch:"
+        android:id="@+id/branch"
+        android:layout_below="@+id/radiogroup"
+        android:textColor="@color/black"
+        android:layout_marginLeft="8dp"
+        android:textSize="18dp"
+        />
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/branch"
+        android:id="@+id/radiogroupbranch"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSE"
+            android:textColor="@color/black"
+            android:id="@+id/cse"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MNC"
+            android:textColor="@color/black"
+            android:id="@+id/mnc"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EEE"
+            android:textColor="@color/black"
+            android:id="@+id/eee"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ECE"
+            android:textColor="@color/black"
+            android:id="@+id/ece"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ME"
+            android:textColor="@color/black"
+            android:id="@+id/me"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CIVIL"
+            android:textColor="@color/black"
+            android:id="@+id/civil"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CL"
+            android:textColor="@color/black"
+            android:id="@+id/cl"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CST"
+            android:textColor="@color/black"
+            android:id="@+id/cst"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BT"
+            android:textColor="@color/black"
+            android:id="@+id/bt"
+            />
+
+    </RadioGroup>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:id="@+id/signUpbtn"
         android:layout_marginTop="15dp"
-        android:layout_below="@+id/radiogroup"
+        android:layout_below="@+id/radiogroupbranch"
         android:layout_centerHorizontal="true"/>
     <TextView
         android:layout_width="wrap_content"

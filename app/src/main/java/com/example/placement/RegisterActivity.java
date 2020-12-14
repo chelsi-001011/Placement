@@ -36,10 +36,10 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mpassword;
     private String Email;
     private String Username;
-    private RadioGroup radioGroup;
-    private RadioButton radioButton;
+    private RadioGroup radioGroup,radioGroupBranch;
+    private RadioButton radioButton,radioButtonBranch;
     private String Password;
-    private String type;
+    private String type,branch;
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
 
@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         mUsername=(EditText) findViewById(R.id.name);
         mpassword=(EditText) findViewById(R.id.password);
         radioGroup=(RadioGroup) findViewById(R.id.radiogroup);
-
+        radioGroupBranch=(RadioGroup) findViewById(R.id.radiogroupbranch);
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,14 +66,87 @@ public class RegisterActivity extends AppCompatActivity {
                 Password=mpassword.getText().toString();
                 int selectedId=radioGroup.getCheckedRadioButtonId();
                 radioButton=(RadioButton) findViewById(selectedId);
+                int selectedBranch=radioGroupBranch.getCheckedRadioButtonId();
+                radioButtonBranch=(RadioButton) findViewById(selectedBranch);
                 type=radioButton.getText().toString();
                 Username=mUsername.getText().toString();
-                setUpFirebase(Email,Password,Username,type);
+                if(type.equals("Student")){
+                    branch=radioButtonBranch.getText().toString();
+                    setUpFirebase(Email,Password,Username,type,branch);
+
+
+                }
+                else{
+                    setUpFirebase(Email,Password,Username,type);
+
+                }
             }
         });
     }
 
-    private void setUpFirebase(final String email,final   String password,final   String name,final String typeof){
+    private void setUpFirebase(final String email,final   String password,final   String name,final String typeof,final String branch){
+        if(email.equals("")||password.equals("")){
+            Toast.makeText(RegisterActivity.this, "Fill all fields", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(RegisterActivity.this, "Sending Verification link", Toast.LENGTH_SHORT).show();
+                                Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                                startActivity(intent);
+                                finish();
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                if(user!=null){
+                                    final String user_id=user.getUid();
+                                    user.sendEmailVerification()
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
+                                                        //   Toast.makeText(RegisterActivity.this, "Verified", Toast.LENGTH_SHORT).show();
+                                                        Map<String, Object> user = new HashMap<>();
+                                                        user.put("email", email);
+                                                        user.put("name", name);
+                                                        user.put("type",typeof);
+                                                        user.put("user_id",user_id);
+                                                        user.put("branch",branch);
+                                                        user.put("phone","");
+                                                        db.collection("users")
+                                                                .add(user)
+                                                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                                    @Override
+                                                                    public void onSuccess(DocumentReference documentReference) {
+                                                                        Toast.makeText(RegisterActivity.this, "Added", Toast.LENGTH_LONG).show();
+                                                                    }
+                                                                })
+                                                                .addOnFailureListener(new OnFailureListener() {
+                                                                    @Override
+                                                                    public void onFailure(@NonNull Exception e) {
+
+                                                                    }
+                                                                });
+
+                                                    }
+                                                    else{
+                                                        Toast.makeText(RegisterActivity.this, "Could Not send verification Link", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                }
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Toast.makeText(RegisterActivity.this, "Failed Authentication", Toast.LENGTH_SHORT).show();
+                            }
+
+                            // ...
+                        }
+                    });
+        }
+    }
+    private void setUpFirebase(final String email, final   String password, final   String name, final String typeof){
         if(email.equals("")||password.equals("")){
             Toast.makeText(RegisterActivity.this, "Fill all fields", Toast.LENGTH_SHORT).show();
         }

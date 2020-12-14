@@ -99,6 +99,39 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     }
                 });
+        db.collection("applications")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            try {
+                                mAuth=FirebaseAuth.getInstance();
+                                FirebaseUser user=mAuth.getCurrentUser();
+                                String user_id=user.getUid();
+                                for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+
+                                    //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
+                                    //String given_uid=documentSnapshot.getString("use")
+                                    if(documentSnapshot.getString("user_id").equals(user_id)){
+
+                                        new_name=name.getText().toString();
+                                        db.collection("applications").document(documentSnapshot.getId()).update("name",new_name);
+                                        new_email=email.getText().toString();
+                                        db.collection("applications").document(documentSnapshot.getId()).update("email",new_email);
+
+                                    }
+                                }
+                            }catch (NullPointerException e){
+
+                            }
+
+                        }
+                        else{
+                            Toast.makeText(ProfileActivity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
 
 

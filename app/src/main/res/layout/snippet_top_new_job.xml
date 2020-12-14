@@ -8,35 +8,36 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/backprofile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_backarrow" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:text="Home"
+                android:layout_marginLeft="40dp"
+                android:text="My Profile"
                 android:textColor="@color/black"
                 android:textSize="20sp"
 
                 />
 
-            <ImageView
-                android:id="@+id/myProfile"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+            <TextView
+                android:id="@+id/post_job"
+                android:layout_width="55dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="1dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
                 android:scaleType="center"
-                android:src="@drawable/ic_profile" />
-            <ImageView
-                android:id="@+id/create"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="5dp"
-                android:scaleType="center"
-                android:layout_toLeftOf="@+id/myProfile"
-                android:paddingRight="2dp"
-                android:src="@drawable/ic_create" />
+                android:text="Post"/>
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
