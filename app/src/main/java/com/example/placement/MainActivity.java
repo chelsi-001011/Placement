@@ -21,7 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
     private Button login;
-    private ImageView profile,create;
+    private ImageView profile,create,job;
     private FirebaseAuth mAuth;
     String type ="";
     // int x;
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         profile=(ImageView) findViewById(R.id.myProfile);
         create=(ImageView) findViewById(R.id.create);
         create.setVisibility(View.GONE);
+        job=(ImageView) findViewById(R.id.job);
         isCompany();
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +57,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent=new Intent(MainActivity.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        job.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Job_Check_CCD.class);
+                startActivity(intent);
             }
         });
     }

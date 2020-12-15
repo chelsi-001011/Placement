@@ -6,5 +6,11 @@
     <color name="darkGrey">#A9A9A9</color>
     <color name="white">#fff</color>
     <color name="black">#000</color>
+    <color name="green">#7FFF00</color>
+    <color name="lightgreen">#ADFF2F</color>
+    <color name="red">#F32013</color>
+    <color name="darkRed">#CA0B00</color>
+
+
 
 </resources>

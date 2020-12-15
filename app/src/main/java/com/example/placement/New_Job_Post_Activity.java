@@ -65,6 +65,8 @@ public class New_Job_Post_Activity extends AppCompatActivity {
             //    setUpWidgets(mCpi,mPosition,mLocation,mLastDate,mDescription);
              //   final String cpi, String position, String location, String LastDate, String Description
                 setUpWidgets();
+                Toast.makeText(New_Job_Post_Activity.this, "Posted", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -92,7 +94,7 @@ public class New_Job_Post_Activity extends AppCompatActivity {
                                         db.collection("applications").document(documentSnapshot.getId()).update("CPI Cutoff",mcpi);
                                         db.collection("applications").document(documentSnapshot.getId()).update("Location",mposition);
                                         db.collection("applications").document(documentSnapshot.getId()).update("Position",mLocation);
-                                        db.collection("applications").document(documentSnapshot.getId()).update("Last Date To Apply",mLastDate);
+                                        db.collection("applications").document(documentSnapshot.getId()).update("lastDate",mLastDate);
                                         db.collection("applications").document(documentSnapshot.getId()).update("Description",mDescription);
 
                                         break;
@@ -158,71 +160,73 @@ public class New_Job_Post_Activity extends AppCompatActivity {
                                     mAuth=FirebaseAuth.getInstance();
                                     FirebaseUser user=mAuth.getCurrentUser();
                                     String user_id=user.getUid();
+
+                                    Map<String,Object> job=new HashMap<>();
+                                    String name;
                                     for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
 
                                         //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
                                         //String given_uid=documentSnapshot.getString("use")
                                         if(documentSnapshot.getString("user_id").equals(user_id)){
-                                            String name=documentSnapshot.getString("name");
-                                            Map<String,Object> job=new HashMap<>();
-                                            job.put("branches",branchesOffered);
-                                            job.put("user_id",mAuth.getCurrentUser().getUid());
+                                            name=documentSnapshot.getString("name");
                                             job.put("name",name);
-                                            job.put("document_id","");
-                                            job.put("CPI Cutoff","");
-                                            job.put("Location","");
-                                            job.put("Position","");
-                                            job.put("Last Date To Apply","");
-                                            job.put("Description","");
-                                            db.collection("applications")
-                                                    .add(job)
-                                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                                        @Override
-                                                        public void onSuccess(DocumentReference documentReference) {
-
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-
-                                                        }
-                                                    });
-                                            db.collection("applications")
-                                                    .get()
-                                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                            if(task.isSuccessful()){
-                                                                try {
-                                                                    mAuth=FirebaseAuth.getInstance();
-                                                                    FirebaseUser user=mAuth.getCurrentUser();
-                                                                    String user_id=user.getUid();
-                                                                    for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
-
-                                                                        //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
-                                                                        //String given_uid=documentSnapshot.getString("use")
-                                                                        if(documentSnapshot.getString("user_id").equals(user_id)){
-                                                                            String id=documentSnapshot.getId();
-                                                                            db.collection("applications").document(documentSnapshot.getId()).update("document_id",id);
-
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                }catch (NullPointerException e){
-
-                                                                }
-
-                                                            }
-                                                            else{
-                                                                Toast.makeText(New_Job_Post_Activity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        }
-                                                    });
-
                                             break;
                                         }
                                     }
+                                    job.put("branches",branchesOffered);
+                                    job.put("user_id",mAuth.getCurrentUser().getUid());
+                                    job.put("document_id","");
+                                    job.put("CPI Cutoff","");
+                                    job.put("Location","");
+                                    job.put("Position","");
+                                    job.put("lastDate","");
+                                    job.put("Description","");
+                                    job.put("accepted",false);
+                                    db.collection("applications")
+                                            .add(job)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+
+                                                }
+                                            });
+                                    db.collection("applications")
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if(task.isSuccessful()){
+                                                        try {
+                                                            mAuth=FirebaseAuth.getInstance();
+                                                            FirebaseUser user=mAuth.getCurrentUser();
+                                                            String user_id=user.getUid();
+                                                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+
+                                                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
+                                                                //String given_uid=documentSnapshot.getString("use")
+                                                                if(documentSnapshot.getString("user_id").equals(user_id)){
+                                                                    String id=documentSnapshot.getId();
+                                                                    db.collection("applications").document(documentSnapshot.getId()).update("document_id",id);
+
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }catch (NullPointerException e){
+
+                                                        }
+
+                                                    }
+                                                    else{
+                                                        Toast.makeText(New_Job_Post_Activity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
                                 }catch (NullPointerException e){
 
                                 }
