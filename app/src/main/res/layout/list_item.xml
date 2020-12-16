@@ -49,6 +49,13 @@
                 android:id="@+id/accept"
                 android:layout_alignParentRight="true"
                 />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_rejected"
+                android:id="@+id/reject"
+                android:layout_alignParentRight="true"
+                />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"

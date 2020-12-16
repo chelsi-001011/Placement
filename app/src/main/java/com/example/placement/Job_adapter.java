@@ -2,7 +2,7 @@ package com.example.placement;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
@@ -49,6 +43,7 @@ public class Job_adapter extends ArrayAdapter<Job> {
         ImageView image=(ImageView) convertView.findViewById(R.id.image);
         ImageView accepted=(ImageView) convertView.findViewById(R.id.accept);
         ImageView not_accepted=(ImageView) convertView.findViewById(R.id.not_accept);
+        ImageView rejected=(ImageView) convertView.findViewById(R.id.reject);
         Job job=getItem(position);
         name.setText(job.getName());
         description.setText(job.getDescription());
@@ -59,10 +54,18 @@ public class Job_adapter extends ArrayAdapter<Job> {
         if(job.isAccepted()){
             accepted.setVisibility(View.VISIBLE);
             not_accepted.setVisibility(View.GONE);
+            rejected.setVisibility(View.GONE);
+        }
+        else if(job.isRejected()){
+            rejected.setVisibility(View.VISIBLE);
+            accepted.setVisibility(View.GONE);
+            not_accepted.setVisibility(View.GONE);
         }
         else{
-            accepted.setVisibility(View.GONE);
             not_accepted.setVisibility(View.VISIBLE);
+            accepted.setVisibility(View.GONE);
+            rejected.setVisibility(View.GONE);
+
         }
         return convertView;
     }

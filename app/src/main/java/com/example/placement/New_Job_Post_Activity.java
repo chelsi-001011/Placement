@@ -64,53 +64,53 @@ public class New_Job_Post_Activity extends AppCompatActivity {
                 prepareBranches();
             //    setUpWidgets(mCpi,mPosition,mLocation,mLastDate,mDescription);
              //   final String cpi, String position, String location, String LastDate, String Description
-                setUpWidgets();
+                //setUpWidgets();
                 Toast.makeText(New_Job_Post_Activity.this, "Posted", Toast.LENGTH_SHORT).show();
 
             }
         });
     }
-    private void setUpWidgets(){
-        db.collection("applications")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            try {
-                                mAuth=FirebaseAuth.getInstance();
-                                FirebaseUser user=mAuth.getCurrentUser();
-                                String user_id=user.getUid();
-                                for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
-
-                                    //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
-                                    //String given_uid=documentSnapshot.getString("use")
-                                    if(documentSnapshot.getString("user_id").equals(user_id)){
-                                        String mcpi=cpi.getText().toString();
-                                        String mposition=position.getText().toString();
-                                        String mLocation=location.getText().toString();
-                                        String mLastDate=lastDate.getText().toString();
-                                        String mDescription=description.getText().toString();
-                                        db.collection("applications").document(documentSnapshot.getId()).update("CPI Cutoff",mcpi);
-                                        db.collection("applications").document(documentSnapshot.getId()).update("Location",mposition);
-                                        db.collection("applications").document(documentSnapshot.getId()).update("Position",mLocation);
-                                        db.collection("applications").document(documentSnapshot.getId()).update("lastDate",mLastDate);
-                                        db.collection("applications").document(documentSnapshot.getId()).update("Description",mDescription);
-
-                                        break;
-                                    }
-                                }
-                            }catch (NullPointerException e){
-
-                            }
-
-                        }
-                        else{
-                            Toast.makeText(New_Job_Post_Activity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
+//    private void setUpWidgets(){
+//        db.collection("applications")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            try {
+//                                mAuth=FirebaseAuth.getInstance();
+//                                FirebaseUser user=mAuth.getCurrentUser();
+//                                String user_id=user.getUid();
+//                                for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+//
+//                                    //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
+//                                    //String given_uid=documentSnapshot.getString("use")
+//                                    if(documentSnapshot.getString("user_id").equals(user_id)){
+//                                        String mcpi=cpi.getText().toString();
+//                                        String mposition=position.getText().toString();
+//                                        String mLocation=location.getText().toString();
+//                                        String mLastDate=lastDate.getText().toString();
+//                                        String mDescription=description.getText().toString();
+//                                        db.collection("applications").document(documentSnapshot.getId()).update("CPI Cutoff",mcpi);
+//                                        db.collection("applications").document(documentSnapshot.getId()).update("Location",mposition);
+//                                        db.collection("applications").document(documentSnapshot.getId()).update("Position",mLocation);
+//                                        db.collection("applications").document(documentSnapshot.getId()).update("lastDate",mLastDate);
+//                                        db.collection("applications").document(documentSnapshot.getId()).update("Description",mDescription);
+//
+//                                        break;
+//                                    }
+//                                }
+//                            }catch (NullPointerException e){
+//
+//                            }
+//
+//                        }
+//                        else{
+//                            Toast.makeText(New_Job_Post_Activity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//    }
     private void prepareBranches(){
         try {
             if(cse.isChecked()){
@@ -175,13 +175,19 @@ public class New_Job_Post_Activity extends AppCompatActivity {
                                     }
                                     job.put("branches",branchesOffered);
                                     job.put("user_id",mAuth.getCurrentUser().getUid());
+                                    String mcpi=cpi.getText().toString();
+                                    String mposition=position.getText().toString();
+                                    String mLocation=location.getText().toString();
+                                    String mLastDate=lastDate.getText().toString();
+                                    String mDescription=description.getText().toString();
                                     job.put("document_id","");
-                                    job.put("CPI Cutoff","");
-                                    job.put("Location","");
-                                    job.put("Position","");
-                                    job.put("lastDate","");
-                                    job.put("Description","");
+                                    job.put("CPI Cutoff",mcpi);
+                                    job.put("Location",mLocation);
+                                    job.put("Position",mposition);
+                                    job.put("lastDate",mLastDate);
+                                    job.put("Description",mDescription);
                                     job.put("accepted",false);
+                                    job.put("rejected",false);
                                     db.collection("applications")
                                             .add(job)
                                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

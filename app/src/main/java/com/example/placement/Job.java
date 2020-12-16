@@ -7,25 +7,18 @@ public class Job {
     private String lastDate;
     private boolean accepted;
     private String Description;
+    private boolean rejected;
 
-    public Job(String name, int mImageResourceId, String lastDate, boolean accepted, String description) {
+    public Job(String name, int mImageResourceId, String lastDate, boolean accepted, String description, boolean rejected) {
         this.name = name;
         this.mImageResourceId = mImageResourceId;
         this.lastDate = lastDate;
         this.accepted = accepted;
         Description = description;
+        this.rejected = rejected;
     }
-
     public Job() {
 
-    }
-
-    public boolean isAccepted() {
-        return accepted;
-    }
-
-    public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
     }
 
     public String getName() {
@@ -56,12 +49,28 @@ public class Job {
         this.lastDate = lastDate;
     }
 
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
     public String getDescription() {
         return Description;
     }
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    public boolean isRejected() {
+        return rejected;
+    }
+
+    public void setRejected(boolean rejected) {
+        this.rejected = rejected;
     }
 
     public boolean hasImage(){

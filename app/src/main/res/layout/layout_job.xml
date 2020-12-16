@@ -46,10 +46,17 @@
                 android:layout_alignParentRight="true"
                 />
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/ic_check_accept"
                 android:id="@+id/accept"
+                android:layout_alignParentRight="true"
+                />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_rejected"
+                android:id="@+id/reject"
                 android:layout_alignParentRight="true"
                 />
         </RelativeLayout>
