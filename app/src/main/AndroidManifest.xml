@@ -21,6 +21,8 @@
         <activity android:name=".New_Job_Post_Activity"></activity>
         <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".Job_Check_CCD"></activity>
+        <activity android:name=".Job_Particular_CCD"></activity>
+        <activity android:name=".SignOutActivity"></activity>
     </application>
 
 </manifest>

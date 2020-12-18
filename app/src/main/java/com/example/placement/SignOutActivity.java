@@ -16,6 +16,7 @@ public class SignOutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_out);
         signout=(Button) findViewById(R.id.signoutbtn);
         mAuth=FirebaseAuth.getInstance();
         signout.setOnClickListener(new View.OnClickListener() {
@@ -24,6 +25,7 @@ public class SignOutActivity extends AppCompatActivity {
                 mAuth.signOut();
                 Intent intent=new Intent(SignOutActivity.this,LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

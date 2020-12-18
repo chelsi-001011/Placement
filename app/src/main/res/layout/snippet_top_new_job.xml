@@ -9,7 +9,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/backprofile"
+                android:id="@+id/backcreate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -21,16 +21,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:text="My Profile"
+                android:text="Create a Job"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="25sp"
 
                 />
 
             <Button
                 android:id="@+id/post_job"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="1dp"

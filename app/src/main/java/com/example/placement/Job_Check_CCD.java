@@ -1,6 +1,9 @@
 package com.example.placement;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,9 +32,9 @@ public class Job_Check_CCD extends AppCompatActivity {
         db.collection("applications").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                List<Job> mJobList = new ArrayList<>();
+                final List<Job> mJobList = new ArrayList<Job>();
 
-                mJobList=new ArrayList<Job>();
+              //  mJobList=new ArrayList<Job>();
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
                         Job job=documentSnapshot.toObject(Job.class);
@@ -40,6 +43,16 @@ public class Job_Check_CCD extends AppCompatActivity {
                     ListView mJobView=(ListView) findViewById(R.id.list);
                     Job_adapter mJobAdapter=new Job_adapter(Job_Check_CCD.this,mJobList);
                     mJobView.setAdapter(mJobAdapter);
+                    mJobView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Job jobi= mJobList.get(i);
+                            Intent intent=new Intent(Job_Check_CCD.this,Job_Particular_CCD.class);
+                            intent.putExtra("Document id",jobi.getDocument_id());
+                            startActivity(intent);
+
+                        }
+                    });
                 }
                 else{
                     Toast.makeText(Job_Check_CCD.this, "error", Toast.LENGTH_SHORT).show();

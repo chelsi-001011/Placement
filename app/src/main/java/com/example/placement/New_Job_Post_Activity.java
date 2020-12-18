@@ -1,9 +1,11 @@
 package com.example.placement;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import java.util.Vector;
 
 public class New_Job_Post_Activity extends AppCompatActivity {
     private CheckBox cse,mnc,eee,ece,me,civil,cl,cst,bt;
+    private ImageView back;
     Vector<String> branchesOffered=new Vector<String>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private TextView post;
@@ -53,6 +56,7 @@ public class New_Job_Post_Activity extends AppCompatActivity {
         location=(EditText) findViewById(R.id.location);
         lastDate=(EditText) findViewById(R.id.lastDate);
         description=(EditText) findViewById(R.id.description);
+        back=(ImageView) findViewById(R.id.backcreate);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +71,14 @@ public class New_Job_Post_Activity extends AppCompatActivity {
                 //setUpWidgets();
                 Toast.makeText(New_Job_Post_Activity.this, "Posted", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(New_Job_Post_Activity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -193,7 +205,37 @@ public class New_Job_Post_Activity extends AppCompatActivity {
                                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                 @Override
                                                 public void onSuccess(DocumentReference documentReference) {
+                                                    db.collection("applications")
+                                                            .get()
+                                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                    if(task.isSuccessful()){
+                                                                        try {
+                                                                            mAuth=FirebaseAuth.getInstance();
+                                                                            FirebaseUser user=mAuth.getCurrentUser();
+                                                                            String user_id=user.getUid();
+                                                                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
 
+                                                                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
+                                                                                //String given_uid=documentSnapshot.getString("use")
+                                                                                if(documentSnapshot.getString("user_id").equals(user_id)){
+                                                                                    String id=documentSnapshot.getId();
+                                                                                    db.collection("applications").document(documentSnapshot.getId()).update("document_id",id);
+
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                        }catch (NullPointerException e){
+
+                                                                        }
+
+                                                                    }
+                                                                    else{
+                                                                        Toast.makeText(New_Job_Post_Activity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }
+                                                            });
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
@@ -202,37 +244,7 @@ public class New_Job_Post_Activity extends AppCompatActivity {
 
                                                 }
                                             });
-                                    db.collection("applications")
-                                            .get()
-                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                    if(task.isSuccessful()){
-                                                        try {
-                                                            mAuth=FirebaseAuth.getInstance();
-                                                            FirebaseUser user=mAuth.getCurrentUser();
-                                                            String user_id=user.getUid();
-                                                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
 
-                                                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
-                                                                //String given_uid=documentSnapshot.getString("use")
-                                                                if(documentSnapshot.getString("user_id").equals(user_id)){
-                                                                    String id=documentSnapshot.getId();
-                                                                    db.collection("applications").document(documentSnapshot.getId()).update("document_id",id);
-
-                                                                    break;
-                                                                }
-                                                            }
-                                                        }catch (NullPointerException e){
-
-                                                        }
-
-                                                    }
-                                                    else{
-                                                        Toast.makeText(New_Job_Post_Activity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-                                            });
                                 }catch (NullPointerException e){
 
                                 }

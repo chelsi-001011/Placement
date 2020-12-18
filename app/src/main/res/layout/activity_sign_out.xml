@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Are you sure you want to sign out?"
+        android:text="Are you sure you want to be Kicked out?"
         android:id="@+id/textSignOut"
         android:textAlignment="center"
         android:layout_marginTop="15dp"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textColor="@color/black"
-        android:text="Sign out"
+        android:text="Yes, Throw me"
         android:textSize="20sp"
         android:background="@drawable/roundedbtn_red"
         android:layout_centerHorizontal="true"/>

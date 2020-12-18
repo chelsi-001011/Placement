@@ -156,6 +156,7 @@ public class ProfileActivity extends AppCompatActivity {
                                         //    Toast.makeText(ProfileActivity.this, documentSnapshot.toString(), Toast.LENGTH_SHORT).show();
                                         //   Toast.makeText(ProfileActivity.this, "yeah", Toast.LENGTH_SHORT).show();
                                         name.setText(documentSnapshot.getString("name"));
+                                       // Toast.makeText(ProfileActivity.this, documentSnapshot.getId(), Toast.LENGTH_SHORT).show();
                                         email.setText(documentSnapshot.getString("email"));
                                         phone.setText(documentSnapshot.getString("phone"));
                                         break;
