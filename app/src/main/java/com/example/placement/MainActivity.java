@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
         create=(ImageView) findViewById(R.id.create);
         create.setVisibility(View.GONE);
         job=(ImageView) findViewById(R.id.job);
+        job.setVisibility(View.GONE);
         isCompany();
+        isCCD();
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +89,38 @@ public class MainActivity extends AppCompatActivity {
                                         type = documentSnapshot.getString("type");
                                         if (type.equals("Company")) {
                                             create.setVisibility(View.VISIBLE);
+                                            break;
+                                        }
+                                    }
+                                }
+                            } catch (NullPointerException e) {
+                            }
+                        } else {
+                            Toast.makeText(MainActivity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+    private void isCCD(){
+        Task<QuerySnapshot> querySnapshotTask = db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    int x = 0;
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            try {
+                                mAuth = FirebaseAuth.getInstance();
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                String user_id = user.getUid();
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+
+                                    //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
+                                    //String given_uid=documentSnapshot.getString("use")
+                                    if (documentSnapshot.getString("user_id").equals(user_id)) {
+                                        type = documentSnapshot.getString("type");
+                                        if (type.equals("CCD")) {
+                                            job.setVisibility(View.VISIBLE);
                                             break;
                                         }
                                     }

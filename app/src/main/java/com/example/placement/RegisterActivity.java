@@ -119,7 +119,6 @@ public class RegisterActivity extends AppCompatActivity {
                                                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                                     @Override
                                                                     public void onSuccess(DocumentReference documentReference) {
-                                                                        Toast.makeText(RegisterActivity.this, "Added", Toast.LENGTH_LONG).show();
                                                                     }
                                                                 })
                                                                 .addOnFailureListener(new OnFailureListener() {
