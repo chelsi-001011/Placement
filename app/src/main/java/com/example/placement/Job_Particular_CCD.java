@@ -41,7 +41,7 @@ public class Job_Particular_CCD extends AppCompatActivity {
         accepted=(TextView) findViewById(R.id.accepted);
         rejected=(TextView) findViewById(R.id.rejected);
         accepted.setVisibility(View.GONE);
-        rejected.setVisibility(View.VISIBLE);
+        rejected.setVisibility(View.GONE);
 
         mDocumentid=getIntent().getStringExtra("Document id");
         setUpWidgets(mDocumentid);

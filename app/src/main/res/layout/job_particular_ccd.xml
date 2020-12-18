@@ -64,28 +64,29 @@
                     android:text="Reject"/>
                 <TextView
                     android:id="@+id/accepted"
-                    android:layout_width="55dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="1dp"
+                    android:layout_marginRight="5dp"
                     android:layout_alignParentRight="true"
                     android:layout_toLeftOf="@+id/accept"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/green"
+
                     android:scaleType="center"
                     android:text="Accepted"/>
                 <TextView
                     android:id="@+id/rejected"
-                    android:layout_width="55dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="1dp"
+                    android:layout_marginRight="5dp"
                     android:layout_toLeftOf="@+id/accept"
                     android:textSize="18sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/red"
                     android:scaleType="center"
-                    android:text="Reject"/>
+                    android:text="Rejected"/>
             </RelativeLayout>
         </com.google.android.material.appbar.AppBarLayout>
 <!--        <include layout="@layout/snippet_top_new_job"/>-->

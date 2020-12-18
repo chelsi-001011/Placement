@@ -223,7 +223,6 @@ public class New_Job_Post_Activity extends AppCompatActivity {
                                                                                     String id=documentSnapshot.getId();
                                                                                     db.collection("applications").document(documentSnapshot.getId()).update("document_id",id);
 
-                                                                                    break;
                                                                                 }
                                                                             }
                                                                         }catch (NullPointerException e){

@@ -45,7 +45,7 @@
                 android:scaleType="center"
                 android:layout_toLeftOf="@+id/create"
                 android:paddingRight="2dp"
-                android:src="@drawable/ic_create" />
+                android:src="@drawable/ic_new" />
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
