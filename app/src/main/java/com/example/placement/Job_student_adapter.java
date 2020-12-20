@@ -57,20 +57,21 @@ public class Job_student_adapter extends ArrayAdapter<Job_Student> {
         if(job_student.hasImage()){
             image.setImageResource(job_student.getmImageResourceId());
         }
-        if(job_student.isApplied()){
-            accepted.setVisibility(View.GONE);
-            applied.setVisibility(View.VISIBLE);
-            rejected.setVisibility(View.GONE);
-        }
-        else if(job_student.isRejected()){
+
+         if(job_student.isRejected()){
             rejected.setVisibility(View.VISIBLE);
             accepted.setVisibility(View.GONE);
             applied.setVisibility(View.GONE);
         }
-        else if(job_student.isSelected()){
+         else if(job_student.isSelected()){
             rejected.setVisibility(View.GONE);
             accepted.setVisibility(View.VISIBLE);
             applied.setVisibility(View.GONE);
+        }
+        else if(job_student.isApplied()){
+            accepted.setVisibility(View.GONE);
+            applied.setVisibility(View.VISIBLE);
+            rejected.setVisibility(View.GONE);
         }
         else{
             applied.setVisibility(View.GONE);

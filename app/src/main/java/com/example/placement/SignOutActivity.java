@@ -37,6 +37,7 @@ public class SignOutActivity extends AppCompatActivity {
         if(FirebaseAuth.getInstance().getCurrentUser()==null){
             Intent intent=new Intent(SignOutActivity.this,LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }

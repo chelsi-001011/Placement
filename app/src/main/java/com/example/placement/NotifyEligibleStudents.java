@@ -47,13 +47,14 @@ public class NotifyEligibleStudents extends AppCompatActivity {
                     for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
                         if(documentSnapshot.getString("user_id").equals(userid)){
                             branch=documentSnapshot.getString("branch");
-                            final String sname=documentSnapshot.getString("name");
                             db.collection("applications").get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             if(task.isSuccessful()){
                                                 for (final QueryDocumentSnapshot document : task.getResult()) {
+
+                                                    final String sname=document.getString("name");
                                                     if((boolean)document.get("accepted")){
                                                         DocumentReference note=db.collection("students_applications").document(userid+" "+document.getString("document_id"));
                                                         note.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -149,5 +150,10 @@ public class NotifyEligibleStudents extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 }
