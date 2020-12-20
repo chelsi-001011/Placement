@@ -23,6 +23,8 @@
         <activity android:name=".Job_Check_CCD"></activity>
         <activity android:name=".Job_Particular_CCD"></activity>
         <activity android:name=".SignOutActivity"></activity>
+        <activity android:name=".NotifyEligibleStudents"></activity>
+        <activity android:name=".Job_Particular_Student"></activity>
     </application>
 
 </manifest>

@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -127,7 +128,32 @@ public class RegisterActivity extends AppCompatActivity {
 
                                                                     }
                                                                 });
-
+//                                                        db.collection("applications").get()
+//                                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                                                                    @Override
+//                                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                                                        if(task.isSuccessful()){
+//                                                                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                                                                ArrayList<String> br=(ArrayList<String>)document.get("branches");
+//                                                                                String document_id=document.getString("document_id");
+//                                                                                for(int i=0;i<br.size();i++){
+//                                                                                    if(branch.equals(br.get(i))){
+//                                                                                        DocumentReference note=db.collection("students_applications")
+//                                                                                                .document(user_id+" "+document_id);
+//                                                                                        note.update("name",name);
+//                                                                                        note.update("user_id_student",user_id);
+//                                                                                        note.update("document_id_company",document_id);
+//                                                                                        note.update("selected",false);
+//                                                                                        note.update("applied",false);
+//                                                                                        note.update("rejected",false);
+//                                                                                        note.update("resume","");
+//                                                                                        break;
+//                                                                                    }
+//                                                                                }
+//                                                                            }
+//                                                                        }
+//                                                                    }
+//                                                                });
                                                     }
                                                     else{
                                                         Toast.makeText(RegisterActivity.this, "Could Not send verification Link", Toast.LENGTH_SHORT).show();

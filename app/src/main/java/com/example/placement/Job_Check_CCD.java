@@ -38,7 +38,10 @@ public class Job_Check_CCD extends AppCompatActivity {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
                         Job job=documentSnapshot.toObject(Job.class);
-                        mJobList.add(job);
+                        if(!job.isRejected()){
+                            mJobList.add(job);
+
+                        }
                     }
                     ListView mJobView=(ListView) findViewById(R.id.list);
                     Job_adapter mJobAdapter=new Job_adapter(Job_Check_CCD.this,mJobList);

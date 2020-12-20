@@ -21,7 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
     private Button login;
-    private ImageView profile,create,job;
+    private ImageView profile,create,job,apply;
     private FirebaseAuth mAuth;
     String type ="";
     // int x;
@@ -37,12 +37,23 @@ public class MainActivity extends AppCompatActivity {
         create.setVisibility(View.GONE);
         job=(ImageView) findViewById(R.id.job);
         job.setVisibility(View.GONE);
+
+        apply=(ImageView) findViewById(R.id.apply);
+        apply.setVisibility(View.GONE);
         isCompany();
         isCCD();
+        isStudent();
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,New_Job_Post_Activity.class);
+                startActivity(intent);
+            }
+        });
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,NotifyEligibleStudents.class);
                 startActivity(intent);
             }
         });
@@ -121,6 +132,38 @@ public class MainActivity extends AppCompatActivity {
                                         type = documentSnapshot.getString("type");
                                         if (type.equals("CCD")) {
                                             job.setVisibility(View.VISIBLE);
+                                            break;
+                                        }
+                                    }
+                                }
+                            } catch (NullPointerException e) {
+                            }
+                        } else {
+                            Toast.makeText(MainActivity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+    private void isStudent(){
+        Task<QuerySnapshot> querySnapshotTask = db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    int x = 0;
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            try {
+                                mAuth = FirebaseAuth.getInstance();
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                String user_id = user.getUid();
+                                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+
+                                    //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
+                                    //String given_uid=documentSnapshot.getString("use")
+                                    if (documentSnapshot.getString("user_id").equals(user_id)) {
+                                        type = documentSnapshot.getString("type");
+                                        if (type.equals("Student")) {
+                                            apply.setVisibility(View.VISIBLE);
                                             break;
                                         }
                                     }

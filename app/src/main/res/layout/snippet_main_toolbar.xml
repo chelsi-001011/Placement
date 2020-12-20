@@ -43,9 +43,18 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="5dp"
                 android:scaleType="center"
-                android:layout_toLeftOf="@+id/create"
+                android:layout_toLeftOf="@+id/myProfile"
                 android:paddingRight="2dp"
                 android:src="@drawable/ic_new" />
+            <ImageView
+                android:id="@+id/apply"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="center"
+                android:layout_toLeftOf="@+id/myProfile"
+                android:paddingRight="2dp"
+                android:src="@drawable/ic_apply" />
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
