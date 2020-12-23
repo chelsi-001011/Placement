@@ -34,8 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Button signUpBtn;
     private EditText mEmail;
     private EditText mUsername;
-    private EditText mpassword;
-    private String Email;
+    private EditText mpassword,mcpi;
+    private String Email,cpi;
     private String Username;
     private RadioGroup radioGroup,radioGroupBranch;
     private RadioButton radioButton,radioButtonBranch;
@@ -55,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         mUsername=(EditText) findViewById(R.id.name);
         mpassword=(EditText) findViewById(R.id.password);
         radioGroup=(RadioGroup) findViewById(R.id.radiogroup);
+        mcpi=(EditText) findViewById(R.id.cpi);
         radioGroupBranch=(RadioGroup) findViewById(R.id.radiogroupbranch);
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,9 +72,10 @@ public class RegisterActivity extends AppCompatActivity {
                 radioButtonBranch=(RadioButton) findViewById(selectedBranch);
                 type=radioButton.getText().toString();
                 Username=mUsername.getText().toString();
+                cpi=mcpi.getText().toString();
                 if(type.equals("Student")){
                     branch=radioButtonBranch.getText().toString();
-                    setUpFirebase(Email,Password,Username,type,branch);
+                    setUpFirebase(Email,Password,Username,type,branch,cpi);
 
 
                 }
@@ -85,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpFirebase(final String email,final   String password,final   String name,final String typeof,final String branch){
+    private void setUpFirebase(final String email,final   String password,final   String name,final String typeof,final String branch,final String cpi){
         if(email.equals("")||password.equals("")){
             Toast.makeText(RegisterActivity.this, "Fill all fields", Toast.LENGTH_SHORT).show();
         }
@@ -115,6 +117,8 @@ public class RegisterActivity extends AppCompatActivity {
                                                         user.put("user_id",user_id);
                                                         user.put("branch",branch);
                                                         user.put("phone","");
+                                                        user.put("resume","");
+                                                        user.put("cpi",cpi);
                                                         db.collection("users")
                                                                 .add(user)
                                                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

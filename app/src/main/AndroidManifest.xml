@@ -25,6 +25,12 @@
         <activity android:name=".SignOutActivity"></activity>
         <activity android:name=".NotifyEligibleStudents"></activity>
         <activity android:name=".Job_Particular_Student"></activity>
+        <activity android:name=".Student_Application_check_CCD"></activity>
+        <activity android:name=".Student_particular_CCD"></activity>
+        <activity android:name=".Student_Application_check_Company"></activity>
+        <activity android:name=".Student_particular_Company"></activity>
+        <activity android:name=".Application_Company"></activity>
+        <activity android:name=".Job_Company_Description"></activity>
     </application>
 
 </manifest>

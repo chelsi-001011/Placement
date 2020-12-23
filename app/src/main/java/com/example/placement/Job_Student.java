@@ -13,8 +13,12 @@ public class Job_Student  {
     private String user_id_student;
     private String document_id_company;
     private boolean rejected;
+    private boolean accepted;
+    private String user_id_company;
 
-    public Job_Student(String name, int mImageResourceId, String lastDate, boolean applied, boolean selected, String description, String user_id_student, String document_id_company, boolean rejected) {
+    public Job_Student(String name, int mImageResourceId, String lastDate, boolean applied,
+                       boolean selected, String description, String user_id_student,
+                       String document_id_company, boolean rejected, boolean accepted, String user_id_company) {
         this.name = name;
         this.mImageResourceId = mImageResourceId;
         this.lastDate = lastDate;
@@ -24,14 +28,32 @@ public class Job_Student  {
         this.user_id_student = user_id_student;
         this.document_id_company = document_id_company;
         this.rejected = rejected;
+        this.accepted = accepted;
+        this.user_id_company = user_id_company;
     }
 
     public Job_Student() {
 
     }
 
+    public String getUser_id_company() {
+        return user_id_company;
+    }
+
+    public void setUser_id_company(String user_id_company) {
+        this.user_id_company = user_id_company;
+    }
+
     public String getDocument_id_company() {
         return document_id_company;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
     }
 
     public void setDocument_id_company(String document_id_company) {

@@ -42,58 +42,23 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_check"
-                android:id="@+id/applied"
+                android:id="@+id/not_accept"
                 android:layout_alignParentRight="true"
                 />
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_check_accept"
-                android:id="@+id/selected"
+                android:id="@+id/accept"
                 android:layout_alignParentRight="true"
                 />
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_rejected"
-                android:id="@+id/rejected"
+                android:id="@+id/reject"
                 android:layout_alignParentRight="true"
                 />
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rel1"
-            >
-            <TextView
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/description"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:text="Description"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:layout_alignParentBottom="true"
-                />
-            <!--                android:maxLength="25"-->
-            <!--                android:singleLine="true" -->
-
-            <TextView
-                android:id="@+id/last_date"
-                android:layout_width="65dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:textColor="@color/darkGrey"
-                android:textAlignment="viewEnd"
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:layout_marginRight="0dp"
-                android:text="Last Date"
-                android:textSize="10sp"
-                android:gravity="end" />
         </RelativeLayout>
 
     </RelativeLayout>

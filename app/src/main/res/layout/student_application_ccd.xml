@@ -39,7 +39,7 @@
                     />
 
                 <Button
-                    android:id="@+id/apply"
+                    android:id="@+id/accept"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -49,9 +49,21 @@
                     android:textColor="@color/black"
                     android:scaleType="center"
                     android:background="@drawable/roundedbtn_green"
-                    android:text="Apply"/>
+                    android:text="Accept"/>
+                <Button
+                    android:id="@+id/reject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_toLeftOf="@+id/accept"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:scaleType="center"
+                    android:background="@drawable/roundedbtn_red"
+                    android:text="Reject"/>
                 <TextView
-                    android:id="@+id/selected"
+                    android:id="@+id/accepted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -61,21 +73,7 @@
                     android:textColor="@color/green"
 
                     android:scaleType="center"
-                    android:text="Selected"/>
-                <TextView
-                android:id="@+id/applied"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_alignParentRight="true"
-                android:textSize="18sp"
-                android:textColor="@color/green"
-
-                android:scaleType="center"
-                android:text="Applied"/>
-
-
+                    android:text="Accepted"/>
                 <TextView
                     android:id="@+id/rejected"
                     android:layout_width="wrap_content"
@@ -87,20 +85,41 @@
                     android:textColor="@color/red"
                     android:scaleType="center"
                     android:text="Rejected"/>
+                <TextView
+                    android:id="@+id/selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/green"
+                    android:scaleType="center"
+                    android:text="Selected"/>
             </RelativeLayout>
         </com.google.android.material.appbar.AppBarLayout>
-        <!--        <include layout="@layout/snippet_top_new_job"/>-->
+<!--        <include layout="@layout/snippet_top_new_job"/>-->
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_below="@+id/toolbar"
         android:layout_height="wrap_content">
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Company Description :"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:id="@+id/comp"
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="For branches :"
             android:layout_marginLeft="10dp"
+            android:layout_below="@+id/comp"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:id="@+id/branch"
@@ -213,6 +232,80 @@
             android:layout_height="wrap_content"
             android:id="@+id/description_job"
             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Student Details Description :"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:layout_below="@+id/description_job"
+            android:textStyle="bold"
+            android:id="@+id/student"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/student"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:id="@+id/student_name"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/student_name"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"
+            android:id="@+id/student_name_detail"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/student_name_detail"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/student_cpi"
+            android:textColor="@color/black"
+            android:text="Cpi"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/student_cpi"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/student_cpi_details"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/student_cpi_details"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/student_branch"
+            android:textColor="@color/black"
+            android:text="Branch"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/student_branch"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/student_branch_details"
+            android:layout_marginBottom="10dp"
+            />
+
 
     </RelativeLayout>
 

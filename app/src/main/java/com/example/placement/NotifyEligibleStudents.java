@@ -76,10 +76,12 @@ public class NotifyEligibleStudents extends AppCompatActivity {
                                                                                 note.put("document_id_company",document_id);
                                                                                 note.put("selected",false);
                                                                                 note.put("applied",false);
+                                                                                note.put("user_id_company",document.getString("user_id"));
                                                                                 note.put("lastDate",document.getString("lastDate"));
                                                                                 note.put("Description",document.getString("Description"));
                                                                                 note.put("rejected",false);
                                                                                 note.put("resume","");
+                                                                                note.put("accepted",false);
                                                                                 db.collection("students_applications")
                                                                                         .document(userid+" "+document_id).set(note)
                                                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {

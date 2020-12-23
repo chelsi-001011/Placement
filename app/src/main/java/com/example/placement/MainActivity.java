@@ -21,7 +21,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
     private Button login;
-    private ImageView profile,create,job,apply;
+    private ImageView profile,create,job,apply,wait,compcheck;
+
+   // private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
     String type ="";
     // int x;
@@ -34,9 +36,13 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         profile=(ImageView) findViewById(R.id.myProfile);
         create=(ImageView) findViewById(R.id.create);
+        wait=(ImageView) findViewById(R.id.scheck);
         create.setVisibility(View.GONE);
+        wait.setVisibility(View.GONE);
         job=(ImageView) findViewById(R.id.job);
         job.setVisibility(View.GONE);
+        compcheck=(ImageView) findViewById(R.id.companycheck);
+        compcheck.setVisibility(View.GONE);
 
         apply=(ImageView) findViewById(R.id.apply);
         apply.setVisibility(View.GONE);
@@ -78,8 +84,40 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
+        wait.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Student_Application_check_CCD.class);
+                startActivity(intent);
+            }
+        });
+        compcheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Application_Company.class);
+                startActivity(intent);
+            }
+        });
 
+    }
+//    private void setUpFirebase(){
+//        mAuth=FirebaseAuth.getInstance();
+//
+//        mAuthListener=new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user=firebaseAuth.getCurrentUser();
+//
+//                if(user!=null){
+//
+//                }
+//                else{
+//                    Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        };
+//    }
     private void isCompany(){
         Task<QuerySnapshot> querySnapshotTask = db.collection("users")
                 .get()
@@ -100,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                                         type = documentSnapshot.getString("type");
                                         if (type.equals("Company")) {
                                             create.setVisibility(View.VISIBLE);
+                                            compcheck.setVisibility(View.VISIBLE);
                                             break;
                                         }
                                     }
@@ -132,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                                         type = documentSnapshot.getString("type");
                                         if (type.equals("CCD")) {
                                             job.setVisibility(View.VISIBLE);
+                                            wait.setVisibility(View.VISIBLE);
                                             break;
                                         }
                                     }
@@ -179,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         FirebaseUser currentUser=mAuth.getCurrentUser();
         if(currentUser!=null){
 
@@ -191,7 +232,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
+//        if(mAuthListener!=null){
+//            mAuth.addAuthStateListener(mAuthListener);
+//        }
     }
 }

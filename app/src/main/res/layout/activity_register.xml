@@ -145,13 +145,22 @@
             />
 
     </RadioGroup>
+    <EditText
+        android:id="@+id/cpi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radiogroupbranch"
+        android:layout_marginTop="27dp"
+        android:hint="CPI"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:id="@+id/signUpbtn"
         android:layout_marginTop="15dp"
-        android:layout_below="@+id/radiogroupbranch"
+        android:layout_below="@+id/cpi"
         android:layout_centerHorizontal="true"/>
     <TextView
         android:layout_width="wrap_content"

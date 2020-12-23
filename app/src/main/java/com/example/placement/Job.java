@@ -9,8 +9,11 @@ public class Job {
     private String Description;
     private boolean rejected;
     private String document_id;
+    private String user_id;
 
-    public Job(String name, int mImageResourceId, String lastDate, boolean accepted, String description, boolean rejected, String document_id) {
+    public Job(String name, int mImageResourceId, String lastDate,
+               boolean accepted, String description,
+               boolean rejected, String document_id, String user_id) {
         this.name = name;
         this.mImageResourceId = mImageResourceId;
         this.lastDate = lastDate;
@@ -18,6 +21,7 @@ public class Job {
         Description = description;
         this.rejected = rejected;
         this.document_id = document_id;
+        this.user_id = user_id;
     }
 
     public String getDocument_id() {
@@ -30,6 +34,14 @@ public class Job {
 
     public Job() {
 
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getName() {

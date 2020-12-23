@@ -2,7 +2,6 @@ package com.example.placement;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class Job_student_adapter extends ArrayAdapter<Job_Student> {
+public class Student_Check_CCD_adapter extends ArrayAdapter<Job_Student> {
     private LayoutInflater mInflater;
     private int layoutResource;
     private Context mContext;
@@ -24,7 +23,7 @@ public class Job_student_adapter extends ArrayAdapter<Job_Student> {
 //        super(context, 0, objects);
 //    }
 
-    public Job_student_adapter(@NonNull Context context, @NonNull List<Job_Student> objects) {
+    public Student_Check_CCD_adapter(@NonNull Context context, @NonNull List<Job_Student> objects) {
         super(context, 0, objects);
     }
 
@@ -49,6 +48,10 @@ public class Job_student_adapter extends ArrayAdapter<Job_Student> {
         ImageView selected=(ImageView) convertView.findViewById(R.id.selected);
         ImageView applied=(ImageView) convertView.findViewById(R.id.applied);
         ImageView rejected=(ImageView) convertView.findViewById(R.id.rejected);
+
+        applied.setVisibility(View.GONE);
+        selected.setVisibility(View.GONE);
+        rejected.setVisibility(View.GONE);
         //Job job=getItem(position);
         Job_Student job_student=getItem(position);
         name.setText(job_student.getName());
@@ -57,27 +60,11 @@ public class Job_student_adapter extends ArrayAdapter<Job_Student> {
         if(job_student.hasImage()){
             image.setImageResource(job_student.getmImageResourceId());
         }
-
-         if(job_student.isRejected()){
+        if(job_student.isRejected()){
             rejected.setVisibility(View.VISIBLE);
-            selected.setVisibility(View.GONE);
-            applied.setVisibility(View.GONE);
         }
-         else if(job_student.isSelected()){
-            rejected.setVisibility(View.GONE);
+        else if(job_student.isAccepted()){
             selected.setVisibility(View.VISIBLE);
-            applied.setVisibility(View.GONE);
-        }
-        else if(job_student.isApplied()){
-            selected.setVisibility(View.GONE);
-            applied.setVisibility(View.VISIBLE);
-            rejected.setVisibility(View.GONE);
-        }
-        else{
-            applied.setVisibility(View.GONE);
-            selected.setVisibility(View.GONE);
-            rejected.setVisibility(View.GONE);
-
         }
         return convertView;
     }
