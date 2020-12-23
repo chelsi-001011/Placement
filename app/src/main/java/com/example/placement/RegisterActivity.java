@@ -114,6 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                         user.put("user_id",user_id);
                                                         user.put("branch",branch);
                                                         user.put("phone","");
+                                                        user.put("resume","");
                                                         db.collection("users")
                                                                 .add(user)
                                                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

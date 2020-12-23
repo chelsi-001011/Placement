@@ -56,6 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
     private String new_name;
     private String new_email;
     private String new_phone;
+    private String new_resume;
 
     Button selectFile, upload;
     TextView notification;
@@ -76,6 +77,8 @@ public class ProfileActivity extends AppCompatActivity {
         selectFile = findViewById(R.id.selectFile);
         upload = findViewById(R.id.upload);
         notification = findViewById(R.id.notification);
+
+        db.collection("users");
 
         selectFile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +119,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void uploadFile(Uri pdfUri) {
+    private void uploadFile(final Uri pdfUri) {
 
         progressDialog=new ProgressDialog(ProfileActivity.this);
         progressDialog.setProgress(ProgressDialog.STYLE_HORIZONTAL);
@@ -124,9 +127,38 @@ public class ProfileActivity extends AppCompatActivity {
         progressDialog.setProgress(0);
         progressDialog.show();
 
-        final String fileName=""+System.currentTimeMillis();
+        final String fileName=""+name.getText().toString(); // this is the filename which is the name of the student
         StorageReference storageReference=storage; //returns root paths
 
+        db.collection("users") // adding pdfUri's path in the collection
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            try {
+                                mAuth=FirebaseAuth.getInstance();
+                                FirebaseUser user=mAuth.getCurrentUser();
+                                String user_id=user.getUid();
+                                for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+
+                                    if(documentSnapshot.getString("user_id").equals(user_id)){
+                                            new_resume=pdfUri.getEncodedPath();
+                                            db.collection("users").document(documentSnapshot.getId()).update("resume",new_resume);
+                                        setUpProfileWidgets();
+                                        break;
+                                    }
+                                }
+                            }catch (NullPointerException e){
+
+                            }
+
+                        }
+                        else{
+//                            Toast.makeText(ProfileActivity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
         storageReference.child("Uploads").child(fileName).putFile(pdfUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -307,6 +339,7 @@ public class ProfileActivity extends AppCompatActivity {
                                        // Toast.makeText(ProfileActivity.this, documentSnapshot.getId(), Toast.LENGTH_SHORT).show();
                                         email.setText(documentSnapshot.getString("email"));
                                         phone.setText(documentSnapshot.getString("phone"));
+                                        notification.setText(documentSnapshot.getString("resume"));
                                         break;
                                     }
                                 }
