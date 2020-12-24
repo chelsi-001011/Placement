@@ -55,7 +55,6 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView save,back;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     // used to store URLs of uploaded files
-    FirebaseDatabase database;
     private String new_name;
     private String new_email;
     private String new_phone;
@@ -124,7 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void uploadFile(final Uri pdfUri) {
 
-        progressDialog=new ProgressDialog(ProfileActivity.this);
+        progressDialog=new ProgressDialog(this);
         progressDialog.setProgress(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setTitle("Uploading file...");
         progressDialog.setProgress(0);
@@ -133,53 +132,42 @@ public class ProfileActivity extends AppCompatActivity {
         final String fileName=""+name.getText().toString(); // this is the filename which is the name of the student
         StorageReference storageReference=storage; //returns root paths
 
-        db.collection("users") // adding pdfUri's path in the collection
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            try {
-                                mAuth=FirebaseAuth.getInstance();
-                                FirebaseUser user=mAuth.getCurrentUser();
-                                String user_id=user.getUid();
-                                for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
-
-                                    if(documentSnapshot.getString("user_id").equals(user_id)){
-                                            new_resume=pdfUri.getEncodedPath();
-                                            db.collection("users").document(documentSnapshot.getId()).update("resume",new_resume);
-                                        setUpProfileWidgets();
-                                        break;
-                                    }
-                                }
-                            }catch (NullPointerException e){
-
-                            }
-
-                        }
-                        else{
-//                            Toast.makeText(ProfileActivity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
         storageReference.child("Uploads").child(fileName).putFile(pdfUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                 String url=taskSnapshot.getStorage().getDownloadUrl().toString();
-                // store this url in realtime database
-                DatabaseReference reference = database.getReference();
+                db.collection("users") // adding pdfUri's path in the collection
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(ProfileActivity.this,"File successfully uploaded",Toast.LENGTH_SHORT).show();
+                                    try {
+                                        mAuth=FirebaseAuth.getInstance();
+                                        FirebaseUser user=mAuth.getCurrentUser();
+                                        String user_id=user.getUid();
+                                        for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
 
-                reference.child(fileName).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(ProfileActivity.this,"File successfully uploaded",Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(ProfileActivity.this,"File not uploaded successfully",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                                            if(documentSnapshot.getString("user_id").equals(user_id)){
+                                                new_resume=pdfUri.getEncodedPath();
+                                                db.collection("users").document(documentSnapshot.getId()).update("resume",new_resume);
+                                                setUpProfileWidgets();
+                                                break;
+                                            }
+                                        }
+                                    }catch (NullPointerException e){
+
+                                    }
+
+                                }
+                                else{
+                                    Toast.makeText(ProfileActivity.this,"File not uploaded successfully",Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ProfileActivity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -193,9 +181,10 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
 
-                //track the progress of our upload
+//                track the progress of our upload
                 int currentProgress=(int)(100* snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
                 progressDialog.setProgress(currentProgress);
+                progressDialog.dismiss();
             }
         });
 
