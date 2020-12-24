@@ -1,8 +1,5 @@
 package com.example.placement;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,9 +7,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.placement.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        login=(Button) findViewById(R.id.loginbtn);
+       // login=(Button) findViewById(R.id.loginbtn);
         mAuth = FirebaseAuth.getInstance();
         profile=(ImageView) findViewById(R.id.myProfile);
         create=(ImageView) findViewById(R.id.create);
@@ -42,27 +43,27 @@ public class MainActivity extends AppCompatActivity {
         job=(ImageView) findViewById(R.id.job);
         job.setVisibility(View.GONE);
         compcheck=(ImageView) findViewById(R.id.companycheck);
-        compcheck.setVisibility(View.GONE);
+        compcheck.setVisibility(View.VISIBLE);
 
         apply=(ImageView) findViewById(R.id.apply);
-        apply.setVisibility(View.GONE);
+            apply.setVisibility(View.GONE);
         isCompany();
         isCCD();
         isStudent();
-        create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,New_Job_Post_Activity.class);
-                startActivity(intent);
-            }
-        });
-        apply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,NotifyEligibleStudents.class);
-                startActivity(intent);
-            }
-        });
+//        create.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(MainActivity.this,New_Job_Post_Activity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        apply.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(MainActivity.this,NotifyEligibleStudents.class);
+//                startActivity(intent);
+//            }
+//        });
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,31 +71,33 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,SignOutActivity.class);
-                startActivity(intent);
-            }
-        });
-        job.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,Job_Check_CCD.class);
-                startActivity(intent);
-            }
-        });
-        wait.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,Student_Application_check_CCD.class);
-                startActivity(intent);
-            }
-        });
+//        login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(MainActivity.this,SignOutActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        job.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(MainActivity.this,Job_Check_CCD.class);
+//                startActivity(intent);
+//            }
+//        });
+//        wait.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(MainActivity.this,Student_Application_check_CCD.class);
+//                startActivity(intent);
+//            }
+//        });
         compcheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,Application_Company.class);
+//                Intent intent=new Intent(MainActivity.this,Application_Company.class);
+//                startActivity(intent);
+                                Intent intent=new Intent(MainActivity.this,SignOutActivity.class);
                 startActivity(intent);
             }
         });
@@ -118,6 +121,38 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        };
 //    }
+    private void setUpViewPagerCCD(){
+    SectionPagerAdapter adapter=new SectionPagerAdapter(getSupportFragmentManager());
+    adapter.addFragment(new Job_Check_CCD());
+    adapter.addFragment(new Student_Application_check_CCD());
+    ViewPager viewPager=(ViewPager) findViewById(R.id.container);
+    viewPager.setAdapter(adapter);
+    TabLayout tabLayout=(TabLayout) findViewById(R.id.tabs);
+    tabLayout.setupWithViewPager(viewPager);
+    tabLayout.getTabAt(0).setText("Job Check");
+    tabLayout.getTabAt(1).setText("Student Check");
+}
+
+    private void setUpViewPagerCompany(){
+        SectionPagerAdapter adapter=new SectionPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new New_Job_Post_Activity());
+        adapter.addFragment(new Application_Company());
+        ViewPager viewPager=(ViewPager) findViewById(R.id.container);
+        viewPager.setAdapter(adapter);
+        TabLayout tabLayout=(TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setText("Create Job");
+        tabLayout.getTabAt(1).setText("Applications");
+    }
+    private void setUpViewPagerStudent(){
+        SectionPagerAdapter adapter=new SectionPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new NotifyEligibleStudents());
+        ViewPager viewPager=(ViewPager) findViewById(R.id.container);
+        viewPager.setAdapter(adapter);
+        TabLayout tabLayout=(TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setText("Apply");
+    }
     private void isCompany(){
         Task<QuerySnapshot> querySnapshotTask = db.collection("users")
                 .get()
@@ -137,8 +172,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (documentSnapshot.getString("user_id").equals(user_id)) {
                                         type = documentSnapshot.getString("type");
                                         if (type.equals("Company")) {
-                                            create.setVisibility(View.VISIBLE);
-                                            compcheck.setVisibility(View.VISIBLE);
+                                            setUpViewPagerCompany();
                                             break;
                                         }
                                     }
@@ -170,8 +204,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (documentSnapshot.getString("user_id").equals(user_id)) {
                                         type = documentSnapshot.getString("type");
                                         if (type.equals("CCD")) {
-                                            job.setVisibility(View.VISIBLE);
-                                            wait.setVisibility(View.VISIBLE);
+                                            setUpViewPagerCCD();
                                             break;
                                         }
                                     }
@@ -203,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (documentSnapshot.getString("user_id").equals(user_id)) {
                                         type = documentSnapshot.getString("type");
                                         if (type.equals("Student")) {
-                                            apply.setVisibility(View.VISIBLE);
+                                            setUpViewPagerStudent();
                                             break;
                                         }
                                     }
