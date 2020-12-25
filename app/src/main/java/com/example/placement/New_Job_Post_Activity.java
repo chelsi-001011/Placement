@@ -2,7 +2,9 @@ package com.example.placement;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-public class New_Job_Post_Activity extends AppCompatActivity {
+public class New_Job_Post_Activity extends Fragment {
     private CheckBox cse,mnc,eee,ece,me,civil,cl,cst,bt;
     private ImageView back;
     Vector<String> branchesOffered=new Vector<String>();
@@ -37,26 +40,74 @@ public class New_Job_Post_Activity extends AppCompatActivity {
     private EditText cpi,position,location,lastDate,description;
    // String mCpi,mPosition,mLocation,mLastDate,mDescription;
     private FirebaseAuth mAuth;
+//    @Override
+//    protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_new_job_post);
+//        cse=(CheckBox) findViewById(R.id.cse);
+//        mnc=(CheckBox) findViewById(R.id.mnc);
+//        eee=(CheckBox) findViewById(R.id.eee);
+//        ece=(CheckBox) findViewById(R.id.ece);
+//        me=(CheckBox) findViewById(R.id.me);
+//        civil=(CheckBox) findViewById(R.id.civil);
+//        cl=(CheckBox ) findViewById(R.id.cl);
+//        cst=(CheckBox) findViewById(R.id.cst);
+//        bt=(CheckBox ) findViewById(R.id.bt);
+//        post=(TextView) findViewById(R.id.post_job);
+//        cpi=(EditText) findViewById(R.id.cpi);
+//        position=(EditText) findViewById(R.id.position);
+//        location=(EditText) findViewById(R.id.location);
+//        lastDate=(EditText) findViewById(R.id.lastDate);
+//        description=(EditText) findViewById(R.id.description);
+//        back=(ImageView) findViewById(R.id.backcreate);
+//        post.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                mCpi=cpi.getText().toString();
+////                mPosition=position.getText().toString();
+////                mLocation=location.getText().toString();
+////                mLastDate=lastDate.getText().toString();
+////                mDescription=description.getText().toString();
+//                prepareBranches();
+//            //    setUpWidgets(mCpi,mPosition,mLocation,mLastDate,mDescription);
+//             //   final String cpi, String position, String location, String LastDate, String Description
+//                //setUpWidgets();
+//                Toast.makeText(New_Job_Post_Activity.this, "Posted", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(New_Job_Post_Activity.this,MainActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+//    }
+
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_job_post);
-        cse=(CheckBox) findViewById(R.id.cse);
-        mnc=(CheckBox) findViewById(R.id.mnc);
-        eee=(CheckBox) findViewById(R.id.eee);
-        ece=(CheckBox) findViewById(R.id.ece);
-        me=(CheckBox) findViewById(R.id.me);
-        civil=(CheckBox) findViewById(R.id.civil);
-        cl=(CheckBox ) findViewById(R.id.cl);
-        cst=(CheckBox) findViewById(R.id.cst);
-        bt=(CheckBox ) findViewById(R.id.bt);
-        post=(TextView) findViewById(R.id.post_job);
-        cpi=(EditText) findViewById(R.id.cpi);
-        position=(EditText) findViewById(R.id.position);
-        location=(EditText) findViewById(R.id.location);
-        lastDate=(EditText) findViewById(R.id.lastDate);
-        description=(EditText) findViewById(R.id.description);
-        back=(ImageView) findViewById(R.id.backcreate);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        final View view=inflater.inflate(R.layout.activity_new_job_post,container,false);
+        cse=(CheckBox) view.findViewById(R.id.cse);
+        mnc=(CheckBox) view.findViewById(R.id.mnc);
+        eee=(CheckBox) view.findViewById(R.id.eee);
+        ece=(CheckBox) view.findViewById(R.id.ece);
+        me=(CheckBox) view.findViewById(R.id.me);
+        civil=(CheckBox) view.findViewById(R.id.civil);
+        cl=(CheckBox ) view.findViewById(R.id.cl);
+        cst=(CheckBox) view.findViewById(R.id.cst);
+        bt=(CheckBox ) view.findViewById(R.id.bt);
+        post=(TextView) view.findViewById(R.id.post_job);
+        cpi=(EditText) view.findViewById(R.id.cpi);
+        position=(EditText) view.findViewById(R.id.position);
+        location=(EditText) view.findViewById(R.id.location);
+        lastDate=(EditText) view.findViewById(R.id.lastDate);
+        description=(EditText) view.findViewById(R.id.description);
+        back=(ImageView) view.findViewById(R.id.backcreate);
+        back.setVisibility(View.GONE);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,23 +117,24 @@ public class New_Job_Post_Activity extends AppCompatActivity {
 //                mLastDate=lastDate.getText().toString();
 //                mDescription=description.getText().toString();
                 prepareBranches();
-            //    setUpWidgets(mCpi,mPosition,mLocation,mLastDate,mDescription);
-             //   final String cpi, String position, String location, String LastDate, String Description
+                //    setUpWidgets(mCpi,mPosition,mLocation,mLastDate,mDescription);
+                //   final String cpi, String position, String location, String LastDate, String Description
                 //setUpWidgets();
-                Toast.makeText(New_Job_Post_Activity.this, "Posted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Posted", Toast.LENGTH_SHORT).show();
 
             }
         });
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(New_Job_Post_Activity.this,MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(getActivity(),MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+        return view;
     }
-//    private void setUpWidgets(){
+
+    //    private void setUpWidgets(){
 //        db.collection("applications")
 //                .get()
 //                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -231,7 +283,7 @@ public class New_Job_Post_Activity extends AppCompatActivity {
 
                                                                     }
                                                                     else{
-                                                                        Toast.makeText(New_Job_Post_Activity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(getActivity(), "Error in fetching details", Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 }
                                                             });
@@ -250,7 +302,7 @@ public class New_Job_Post_Activity extends AppCompatActivity {
 
                             }
                             else{
-                                Toast.makeText(New_Job_Post_Activity.this, "Error in fetching details", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Error in fetching details", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

@@ -167,14 +167,14 @@
             />
         <TextView
             android:layout_width="match_parent"
-            android:layout_below="@+id/description_job"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="10dp"
-            android:textSize="16sp"
+            android:textSize="26sp"
             android:layout_marginBottom="10dp"
             android:layout_height="wrap_content"
-            android:text="Click to see Students Who Applied"
+            android:text="Student Applications"
             android:id="@+id/applied_students"
-            android:textColor="@color/black"
+            android:textColor="@color/colorAccent"
             />
 
     </RelativeLayout>

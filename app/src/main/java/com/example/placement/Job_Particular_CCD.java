@@ -1,5 +1,6 @@
 package com.example.placement;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,10 +9,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -21,6 +24,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 public class Job_Particular_CCD extends AppCompatActivity {
@@ -63,25 +68,28 @@ public class Job_Particular_CCD extends AppCompatActivity {
                 mreject.setVisibility(View.GONE);
                 acceptedb=true;
                 rejectedb=false;
-                db.collection("applications").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+                db.collection("applications").document(mDocumentid).update("accepted",true);
+                db.collection("applications").document(mDocumentid).update("rejected",false);
+//                db.collection("applications").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @RequiresApi(api = Build.VERSION_CODES.N)
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+//
+//                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
+//                                //String given_uid=documentSnapshot.getString("use")
+//                                if(documentSnapshot.getString("document_id").equals(mDocumentid)){
+//                                    db.collection("applications").document(documentSnapshot.getId()).update("accepted",true);
+//                                    db.collection("applications").document(documentSnapshot.getId()).update("rejected",false);
+//
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                    }
+//                });
 
-                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
-                                //String given_uid=documentSnapshot.getString("use")
-                                if(documentSnapshot.getString("document_id").equals(mDocumentid)){
-
-                                    db.collection("applications").document(documentSnapshot.getId()).update("accepted",true);
-                                    db.collection("applications").document(documentSnapshot.getId()).update("rejected",false);
-
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                });
             }
         });
         mreject.setOnClickListener(new View.OnClickListener() {
@@ -93,24 +101,10 @@ public class Job_Particular_CCD extends AppCompatActivity {
                 mreject.setVisibility(View.GONE);
                 acceptedb=false;
                 rejectedb=true;
-                db.collection("applications").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
 
-                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
-                                //String given_uid=documentSnapshot.getString("use")
-                                if(documentSnapshot.getString("document_id").equals(mDocumentid)){
+                db.collection("applications").document(mDocumentid).update("accepted",false);
+                db.collection("applications").document(mDocumentid).update("rejected",true);
 
-                                    db.collection("applications").document(documentSnapshot.getId()).update("accepted",false);
-                                    db.collection("applications").document(documentSnapshot.getId()).update("rejected",true);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                });
             }
         });
 

@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -331,7 +332,9 @@ public class ProfileActivity extends AppCompatActivity {
                                        // Toast.makeText(ProfileActivity.this, documentSnapshot.getId(), Toast.LENGTH_SHORT).show();
                                         email.setText(documentSnapshot.getString("email"));
                                         phone.setText(documentSnapshot.getString("phone"));
+
                                         notification.setText(documentSnapshot.getString("resume"));
+
                                         break;
                                     }
                                 }
@@ -345,6 +348,7 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     }
                 });
+
     }
 
 

@@ -60,24 +60,26 @@ public class Job_Particular_Student extends AppCompatActivity {
                 rejected.setVisibility(View.GONE);
                 maccept.setVisibility(View.GONE);
                 selected.setVisibility(View.GONE);
-                db.collection("students_applications").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
 
-                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
-                                //String given_uid=documentSnapshot.getString("use")
-                                if(documentSnapshot.getString("document_id_company").equals(mDocumentid)&&documentSnapshot.getString("user_id_student").equals(mAuth.getCurrentUser().getUid())){
-
-                                    db.collection("students_applications").document(documentSnapshot.getId()).update("applied",true);
-
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                });
+                db.collection("students_applications").document(mAuth.getCurrentUser().getUid()+" "+mDocumentid).update("applied",true);
+//                db.collection("students_applications").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+//
+//                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
+//                                //String given_uid=documentSnapshot.getString("use")
+//                                if(documentSnapshot.getString("document_id_company").equals(mDocumentid)&&documentSnapshot.getString("user_id_student").equals(mAuth.getCurrentUser().getUid())){
+//
+//                                    db.collection("students_applications").document(documentSnapshot.getId()).update("applied",true);
+//
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                    }
+//                });
             }
         });
 
