@@ -16,7 +16,10 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -81,14 +84,18 @@ public class Job_Check_CCD extends Fragment {
                 //  mJobList=new ArrayList<Job>();
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+
+
                         Job job=documentSnapshot.toObject(Job.class);
                         if(!job.isRejected()){
+
                             mJobList.add(job);
 
                         }
                     }
                     ListView mJobView=(ListView) view.findViewById(R.id.list);
                     Job_adapter mJobAdapter=new Job_adapter(getActivity(),mJobList);
+                    mJobAdapter.notifyDataSetChanged();
                     mJobView.setAdapter(mJobAdapter);
                     mJobView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override

@@ -222,8 +222,6 @@ public class NotifyEligibleStudents extends Fragment {
 
                                                                                             }
                                                                                         });
-
-
                                                                                 break;
                                                                             }
                                                                         }

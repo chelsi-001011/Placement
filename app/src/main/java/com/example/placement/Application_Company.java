@@ -85,12 +85,13 @@ public class Application_Company extends Fragment {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
                         Job job=documentSnapshot.toObject(Job.class);
-                        if(job.isAccepted()&&job.getUser_id().equals(mAuth.getCurrentUser().getUid())){
+                        if(job.getUser_id().equals(mAuth.getCurrentUser().getUid())){
                             mJobList.add(job);
                         }
                     }
                     ListView mJobView=(ListView) view.findViewById(R.id.list);
                     Job_adapter mJobAdapter=new Job_adapter(getActivity(),mJobList);
+                    mJobAdapter.notifyDataSetChanged();
                     mJobView.setAdapter(mJobAdapter);
                     mJobView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override

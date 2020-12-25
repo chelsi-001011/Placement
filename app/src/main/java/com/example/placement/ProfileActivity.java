@@ -2,6 +2,7 @@ package com.example.placement;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,7 +16,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -162,6 +162,19 @@ public class ProfileActivity extends AppCompatActivity {
                                        // Toast.makeText(ProfileActivity.this, documentSnapshot.getId(), Toast.LENGTH_SHORT).show();
                                         email.setText(documentSnapshot.getString("email"));
                                         phone.setText(documentSnapshot.getString("phone"));
+//                                        db.collection("users").document(documentSnapshot.getId()).addSnapshotListener(
+//                                                new EventListener<DocumentSnapshot>() {
+//                                                    @Override
+//                                                    public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
+//                                                        if (e != null) {
+//                                                            return;
+//                                                        }
+//                                                        if (documentSnapshot != null && documentSnapshot.exists()) {
+//                                                        } else {
+//                                                        }
+//                                                    }
+//                                                }
+//                                        );
                                         break;
                                     }
                                 }
@@ -175,6 +188,7 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     }
                 });
+
     }
 
 
