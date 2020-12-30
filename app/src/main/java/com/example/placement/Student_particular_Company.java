@@ -57,25 +57,26 @@ public class Student_particular_Company extends AppCompatActivity {
                 mreject.setVisibility(View.GONE);
                 acceptedb=true;
                 rejectedb=false;
-                db.collection("students_applications").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
-
-                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
-                                //String given_uid=documentSnapshot.getString("use")
-                                if(documentSnapshot.getString("document_id_company").equals(mDocumentid)&&
-                                documentSnapshot.getString("user_id_student").equals(mUserIdStudent)){
-
-                                    db.collection("students_applications").document(documentSnapshot.getId()).update("selected",true);
-
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                });
+                db.collection("students_applications").document(mUserIdStudent+" "+mDocumentid).update("selected",true);
+//                db.collection("students_applications").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+//
+//                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
+//                                //String given_uid=documentSnapshot.getString("use")
+//                                if(documentSnapshot.getString("document_id_company").equals(mDocumentid)&&
+//                                documentSnapshot.getString("user_id_student").equals(mUserIdStudent)){
+//
+//                                    db.collection("students_applications").document(documentSnapshot.getId()).update("selected",true);
+//
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                    }
+//                });
             }
         });
         mreject.setOnClickListener(new View.OnClickListener() {
@@ -87,25 +88,26 @@ public class Student_particular_Company extends AppCompatActivity {
                 mreject.setVisibility(View.GONE);
                 acceptedb=false;
                 rejectedb=true;
-                db.collection("students_applications").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
-
-                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
-                                //String given_uid=documentSnapshot.getString("use")
-                                if(documentSnapshot.getString("document_id_company").equals(mDocumentid)&&
-                                        documentSnapshot.getString("user_id_student").equals(mUserIdStudent)){
-
-                                    db.collection("students_applications").document(documentSnapshot.getId()).update("rejected",true);
-
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                });
+                db.collection("students_applications").document(mUserIdStudent+" "+mDocumentid).update("rejected",true);
+//                db.collection("students_applications").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
+//
+//                                //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
+//                                //String given_uid=documentSnapshot.getString("use")
+//                                if(documentSnapshot.getString("document_id_company").equals(mDocumentid)&&
+//                                        documentSnapshot.getString("user_id_student").equals(mUserIdStudent)){
+//
+//                                    db.collection("students_applications").document(documentSnapshot.getId()).update("rejected",true);
+//
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                    }
+//                });
             }
         });
 
