@@ -11,6 +11,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +35,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -51,6 +55,8 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.IOException;
 
+import java.io.File;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -58,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private StorageReference storage; // used for uploading files
     private ImageView profilePhoto;
+    private CircleImageView profilePhoto;
     private ImageView save,back;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     // used to store URLs of uploaded files
@@ -83,6 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email);
         phone = (EditText) findViewById(R.id.phone);
         profilePhoto = (ImageView) findViewById(R.id.profilephoto);
+
         save = (ImageView) findViewById(R.id.profile_save);
         back = (ImageView) findViewById(R.id.backprofile);
         mAuth = FirebaseAuth.getInstance();
