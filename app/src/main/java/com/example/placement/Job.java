@@ -4,6 +4,7 @@ public class Job {
     private String name;
     private int mImageResourceId=NO_IMAGE_PROVIDED;
     private static final int NO_IMAGE_PROVIDED=-1;
+    private String company_photo;
     private String lastDate;
     private boolean accepted;
     private String Description;
@@ -11,17 +12,28 @@ public class Job {
     private String document_id;
     private String user_id;
 
-    public Job(String name, int mImageResourceId, String lastDate,
-               boolean accepted, String description,
+    public Job(String name, int mImageResourceId, String company_photo,
+               String lastDate, boolean accepted, String description,
                boolean rejected, String document_id, String user_id) {
         this.name = name;
         this.mImageResourceId = mImageResourceId;
+        this.company_photo = company_photo;
         this.lastDate = lastDate;
         this.accepted = accepted;
         Description = description;
         this.rejected = rejected;
         this.document_id = document_id;
         this.user_id = user_id;
+    }
+    public Job() {
+
+    }
+    public String getCompany_photo() {
+        return company_photo;
+    }
+
+    public void setCompany_photo(String company_photo) {
+        this.company_photo = company_photo;
     }
 
     public String getDocument_id() {
@@ -32,9 +44,7 @@ public class Job {
         this.document_id = document_id;
     }
 
-    public Job() {
 
-    }
 
     public String getUser_id() {
         return user_id;
@@ -98,5 +108,20 @@ public class Job {
 
     public boolean hasImage(){
         return mImageResourceId!=NO_IMAGE_PROVIDED;
+    }
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "name='" + name + '\'' +
+                ", mImageResourceId=" + mImageResourceId +
+                ", company_photo='" + company_photo + '\'' +
+                ", lastDate='" + lastDate + '\'' +
+                ", accepted=" + accepted +
+                ", Description='" + Description + '\'' +
+                ", rejected=" + rejected +
+                ", document_id='" + document_id + '\'' +
+                ", user_id='" + user_id + '\'' +
+                '}';
     }
 }

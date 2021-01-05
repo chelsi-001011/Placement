@@ -9,8 +9,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.Api;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
@@ -20,8 +31,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class MainActivity extends AppCompatActivity  {
+//    private SignInButton gbtn;
+//    GoogleSignInClient mGoogleSignInClient;
     private Button login;
+    private static final int SIGN_IN=1;
     private ImageView profile,create,job,apply,wait,compcheck;
 
    // private FirebaseAuth.AuthStateListener mAuthListener;
@@ -35,6 +55,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
        // login=(Button) findViewById(R.id.loginbtn);
         mAuth = FirebaseAuth.getInstance();
+//        GoogleSignInOptions gsb=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+//        googleApiClient=new GoogleApiClient.Builder(this).enableAutoManage(this,this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API,gsb)
+//                .build();
+//        gbtn=(SignInButton) findViewById(R.id.googlesigninbtn);
+//        gbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+//                startActivity(intent,SIGN_IN);
+//            }
+//        });
+//        gbtn=findViewById(R.id.googlesigninbtn);
+//        gbtn.setVisibility(View.INVISIBLE);
+//        findViewById(R.id.googlesigninbtn).setOnClickListener((View.OnClickListener) this);
+//        GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken("896137102158-1tmubvul7gcjrnonor0270nmit7cb1ic.apps.googleusercontent.com").requestEmail().build();
+//        mGoogleSignInClient= GoogleSignIn.getClient(this,gso);
+
         profile=(ImageView) findViewById(R.id.myProfile);
         create=(ImageView) findViewById(R.id.create);
         wait=(ImageView) findViewById(R.id.scheck);
@@ -249,6 +287,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -271,4 +312,5 @@ public class MainActivity extends AppCompatActivity {
 //            mAuth.addAuthStateListener(mAuthListener);
 //        }
     }
+
 }

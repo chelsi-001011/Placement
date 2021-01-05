@@ -2,7 +2,7 @@ package com.example.placement;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -57,7 +59,10 @@ public class Job_student_adapter extends ArrayAdapter<Job_Student> {
         if(job_student.hasImage()){
             image.setImageResource(job_student.getmImageResourceId());
         }
+        if(job_student.getCompany_photo()!=null){
+            Picasso.get().load(Uri.parse(job_student.getCompany_photo())).into(image);
 
+        }
          if(job_student.isRejected()){
             rejected.setVisibility(View.VISIBLE);
             selected.setVisibility(View.GONE);
