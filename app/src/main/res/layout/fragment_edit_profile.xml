@@ -14,18 +14,33 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/relLayout1"
         android:layout_below="@+id/toolbar"
         android:layout_height="wrap_content">
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="20dp"
+            android:scaleType="centerCrop"
             android:id="@+id/profilephoto"
             android:layout_centerHorizontal="true"
             />
-        <EditText
+        <Button
             android:layout_width="match_parent"
             android:layout_below="@+id/profilephoto"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginRight="90dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/changephoto"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:text="Change photo"
+            android:gravity="center"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_below="@+id/changephoto"
             android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:id="@+id/name"
@@ -54,37 +69,33 @@
         android:id="@+id/upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="53dp"
-        android:layout_marginRight="53dp"
-        android:layout_marginBottom="60dp"
+        android:layout_below="@+id/notification"
         android:text="upload resume"
+        android:layout_toRightOf="@+id/selectFile"
+        android:layout_marginLeft="30dp"
+
         android:textSize="18sp" />
 
     <Button
         android:id="@+id/selectFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="41dp"
-        android:layout_marginLeft="41dp"
-        android:layout_marginBottom="57dp"
+        android:layout_below="@+id/notification"
         android:text="Select File"
+        android:layout_marginLeft="50dp"
+
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="147dp"
-        android:layout_marginBottom="146dp"
-        android:text="no file selected" />
+        android:text="no file selected"
+        android:layout_below="@+id/relLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        />
+
 
 
 </RelativeLayout>

@@ -9,6 +9,7 @@ public class Job_Student  {
     private String lastDate;
     private boolean applied;
     private boolean selected;
+    private String company_photo;
     private String Description;
     private String user_id_student;
     private String document_id_company;
@@ -16,20 +17,30 @@ public class Job_Student  {
     private boolean accepted;
     private String user_id_company;
 
-    public Job_Student(String name, int mImageResourceId, String lastDate, boolean applied,
-                       boolean selected, String description, String user_id_student,
-                       String document_id_company, boolean rejected, boolean accepted, String user_id_company) {
+    public Job_Student(String name, int mImageResourceId, String lastDate,
+                       boolean applied, boolean selected, String company_photo,
+                       String description, String user_id_student, String document_id_company,
+                       boolean rejected, boolean accepted, String user_id_company) {
         this.name = name;
         this.mImageResourceId = mImageResourceId;
         this.lastDate = lastDate;
         this.applied = applied;
         this.selected = selected;
+        this.company_photo = company_photo;
         Description = description;
         this.user_id_student = user_id_student;
         this.document_id_company = document_id_company;
         this.rejected = rejected;
         this.accepted = accepted;
         this.user_id_company = user_id_company;
+    }
+
+    public String getCompany_photo() {
+        return company_photo;
+    }
+
+    public void setCompany_photo(String company_photo) {
+        this.company_photo = company_photo;
     }
 
     public Job_Student() {
