@@ -2,14 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.placement">
-<<<<<<<<< Temporary merge branch 1
-<uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-=========
+
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
->>>>>>>>> Temporary merge branch 2
+
     <application
 
         android:allowBackup="true"
@@ -27,17 +24,11 @@
         </activity>
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".RegisterActivity"></activity>
-<<<<<<<<< Temporary merge branch 1
-        <activity android:name=".New_Job_Post_Activity"
-            tools:ignore="Instantiatable"></activity>
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".Job_Check_CCD"
-            tools:ignore="Instantiatable"></activity>
-=========
+
 <!--        <activity android:name=".New_Job_Post_Activity"></activity>-->
         <activity android:name=".ProfileActivity"></activity>
 <!--        <activity android:name=".Job_Check_CCD"></activity>-->
->>>>>>>>> Temporary merge branch 2
+
         <activity android:name=".Job_Particular_CCD"></activity>
         <activity android:name=".SignOutActivity"></activity>
 <!--        <activity android:name=".NotifyEligibleStudents"></activity>-->

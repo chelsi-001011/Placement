@@ -6,17 +6,12 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-<<<<<<<<< Temporary merge branch 1
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-=========
+
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
->>>>>>>>> Temporary merge branch 2
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,10 +32,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-<<<<<<<<< Temporary merge branch 1
-=========
 
->>>>>>>>> Temporary merge branch 2
+
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -50,23 +44,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-<<<<<<<<< Temporary merge branch 1
-=========
+
 import com.google.firebase.storage.FileDownloadTask;
->>>>>>>>> Temporary merge branch 2
+
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-<<<<<<<<< Temporary merge branch 1
 
-import java.io.File;
-=========
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
->>>>>>>>> Temporary merge branch 2
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -74,11 +63,8 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText name,email,phone;
     private FirebaseAuth mAuth;
     private StorageReference storage; // used for uploading files
-<<<<<<<<< Temporary merge branch 1
-    private CircleImageView profilePhoto;
-=========
+
     private ImageView profilePhoto;
->>>>>>>>> Temporary merge branch 2
     private ImageView save,back;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     // used to store URLs of uploaded files
@@ -86,13 +72,12 @@ public class ProfileActivity extends AppCompatActivity {
     private String new_email;
     private String new_phone;
     private String new_resume;
-<<<<<<<<< Temporary merge branch 1
-=========
+
     private Button changephoto;
     private final int IMG_REQUEST_ID=10;
     private Uri imgUri;
     //FirebaseStorage fstorage;
->>>>>>>>> Temporary merge branch 2
+
 
     Button selectFile, upload;
     TextView notification;
@@ -103,16 +88,12 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_edit_profile);
         name = (EditText) findViewById(R.id.name);
-<<<<<<<<< Temporary merge branch 1
-        email = (EditText) findViewById(R.id.email);
-        phone = (EditText) findViewById(R.id.phone);
-        profilePhoto = (CircleImageView) findViewById(R.id.profilephoto);
-=========
+
         changephoto=(Button) findViewById(R.id.changephoto);
         email = (EditText) findViewById(R.id.email);
         phone = (EditText) findViewById(R.id.phone);
         profilePhoto = (ImageView) findViewById(R.id.profilephoto);
->>>>>>>>> Temporary merge branch 2
+
         save = (ImageView) findViewById(R.id.profile_save);
         back = (ImageView) findViewById(R.id.backprofile);
         mAuth = FirebaseAuth.getInstance();
@@ -122,15 +103,14 @@ public class ProfileActivity extends AppCompatActivity {
         notification = findViewById(R.id.notification);
 
         db.collection("users");
-<<<<<<<<< Temporary merge branch 1
-=========
+
         changephoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 image_change();
             }
         });
->>>>>>>>> Temporary merge branch 2
+
 
         selectFile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,8 +150,7 @@ public class ProfileActivity extends AppCompatActivity {
         setUpProfileWidgets();
 
     }
-<<<<<<<<< Temporary merge branch 1
-=========
+
     private void image_change(){
         Intent intent=new Intent();
         intent.setType("image/*");
@@ -179,7 +158,7 @@ public class ProfileActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent,"Select Picture"),IMG_REQUEST_ID);
     }
 
->>>>>>>>> Temporary merge branch 2
+
 
     private void uploadFile(final Uri pdfUri) {
 
@@ -285,11 +264,7 @@ public class ProfileActivity extends AppCompatActivity {
             pdfUri=data.getData();
              notification.setText("A file is selected : "+data.getData().getLastPathSegment());
         }
-<<<<<<<<< Temporary merge branch 1
-        else{
-            Toast.makeText(ProfileActivity.this,"Please select A file",Toast.LENGTH_SHORT).show();
-        }
-=========
+
         else if(requestCode==IMG_REQUEST_ID&&resultCode==RESULT_OK&&data!=null
                 &&data.getData()!=null ){
             imgUri=data.getData();
@@ -437,7 +412,7 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(ProfileActivity.this,"Please select A file",Toast.LENGTH_SHORT).show();
         }
 
->>>>>>>>> Temporary merge branch 2
+
     }
 
     private void saveWidgets(){
@@ -543,23 +518,9 @@ public class ProfileActivity extends AppCompatActivity {
                                         Picasso.get().load(Uri.parse(documentSnapshot.getString("photo"))).into(profilePhoto);
                                         phone.setText(documentSnapshot.getString("phone"));
                                         notification.setText(documentSnapshot.getString("resume"));
-<<<<<<<<< Temporary merge branch 1
-//                                        db.collection("users").document(documentSnapshot.getId()).addSnapshotListener(
-//                                                new EventListener<DocumentSnapshot>() {
-//                                                    @Override
-//                                                    public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
-//                                                        if (e != null) {
-//                                                            return;
-//                                                        }
-//                                                        if (documentSnapshot != null && documentSnapshot.exists()) {
-//                                                        } else {
-//                                                        }
-//                                                    }
-//                                                }
-//                                        );
-=========
 
->>>>>>>>> Temporary merge branch 2
+
+
                                         break;
                                     }
                                 }
