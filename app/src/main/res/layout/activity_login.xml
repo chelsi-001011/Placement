@@ -50,14 +50,23 @@
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
         />
-    <Button
-        android:layout_width="wrap_content"
+<!--    <Button-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Sign in with google"-->
+<!--        android:id="@+id/googlesigninbtn"-->
+<!--        android:layout_below="@+id/signinbtn"-->
+<!--        android:layout_marginTop="120dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        />-->
+
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign in with google"
         android:id="@+id/googlesigninbtn"
         android:layout_below="@+id/signinbtn"
         android:layout_marginTop="120dp"
-        android:layout_centerHorizontal="true"
+
         />
     <TextView
         android:layout_width="match_parent"

@@ -208,6 +208,8 @@ public class NotifyEligibleStudents extends Fragment {
                                                                                 note.put("rejected",false);
                                                                                 note.put("resume","");
                                                                                 note.put("accepted",false);
+                                                                                note.put("company_photo",document.getString("company_photo"));
+                                                                          //      note.put("student_photo",doc)
                                                                                 db.collection("students_applications")
                                                                                         .document(userid+" "+document_id).set(note)
                                                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -240,6 +242,7 @@ public class NotifyEligibleStudents extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     final List<Job_Student> mJobList = new ArrayList<Job_Student>();
+                                    int x=0;
 
                                     //  mJobList=new ArrayList<Job>();
                                     if(task.isSuccessful()){
@@ -247,8 +250,10 @@ public class NotifyEligibleStudents extends Fragment {
                                             Job_Student job_student=documentSnapshot.toObject(Job_Student.class);
                                             if(job_student.getUser_id_student().equals(userid)){
                                                 mJobList.add(job_student);
+                                                x++;
                                             }
                                         }
+                                      //  Toast.makeText(getActivity(), "pl "+x, Toast.LENGTH_SHORT).show();
                                         ListView mJobView=(ListView) view.findViewById(R.id.list);
                                         Job_student_adapter mJobAdapter=new Job_student_adapter(getActivity(),mJobList);
                                         mJobView.setAdapter(mJobAdapter);
