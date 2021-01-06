@@ -2,6 +2,7 @@ package com.example.placement;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -54,11 +56,13 @@ public class Student_Company_adapter extends ArrayAdapter<Job_Student> {
                     for(QueryDocumentSnapshot documentSnapshot:task.getResult()) {
                         if(documentSnapshot.getString("user_id").equals(user_id)){
                             name.setText(documentSnapshot.getString("name"));
+                            Picasso.get().load(Uri.parse(documentSnapshot.getString("photo"))).into(image);
                         }
                     }
                 }
             }
         });
+
         if(job_student.hasImage()){
             image.setImageResource(job_student.getmImageResourceId());
         }

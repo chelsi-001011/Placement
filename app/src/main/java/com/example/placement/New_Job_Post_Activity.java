@@ -226,14 +226,16 @@ public class New_Job_Post_Activity extends Fragment {
                                     String user_id=user.getUid();
 
                                     Map<String,Object> job=new HashMap<>();
-                                    String name;
+                                    String name,photo;
                                     for(QueryDocumentSnapshot documentSnapshot:task.getResult()){
 
                                         //  Toast.makeText(ProfileActivity.this, user_id+" "+documentSnapshot.getString("user_id"), Toast.LENGTH_SHORT).show();
                                         //String given_uid=documentSnapshot.getString("use")
                                         if(documentSnapshot.getString("user_id").equals(user_id)){
                                             name=documentSnapshot.getString("name");
+                                            photo=documentSnapshot.getString("photo");
                                             job.put("name",name);
+                                            job.put("company_photo",photo);
                                             break;
                                         }
                                     }

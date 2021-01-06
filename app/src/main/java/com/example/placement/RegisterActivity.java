@@ -118,6 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                         user.put("branch",branch);
                                                         user.put("phone","");
                                                         user.put("resume","");
+                                                        user.put("photo","");
                                                         user.put("cpi",cpi);
                                                         db.collection("users")
                                                                 .add(user)
@@ -204,6 +205,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                         user.put("type",typeof);
                                                         user.put("user_id",user_id);
                                                         user.put("phone","");
+                                                        user.put("photo","");
                                                         db.collection("users")
                                                                 .add(user)
                                                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
